@@ -10,9 +10,17 @@
 	        <form>
 	            <div class="form-group">
 	                <div class="input-group">
+	                	<select class="custom-select" name="pulldown" required>
+	                		<option selected>検索項目はコチラ</option>
+	                		<option value="product">商品名</option>
+	                		<option value="explane">説明</option>
+	                		<option value="both">商品名+説明</option>
+	                	</select>>
 	                    <input type="text" class="form-control" placeholder="検索ワードを入力…" name="keyword">
 	                    <div class="input-group-append">
-	                        <button class="btn btn-primary" type="submit">検索</button>
+	                        <button class="btn btn-primary" type="submit">
+	                        	検索
+	                        </button>
 	                    </div>
 	                </div>
 	            </div>
@@ -35,8 +43,11 @@
 	                        </a>
 	                    </div>
 	                </div>
-	                <h6 class="card-subtitle">[[*{price}]] Yen</h6>
-	                <p class="card-text mt-2" th:text="*{description}" style="height: 12rem;"></p>
+	                <h6 class="card-subtitle">[[*{price}]]
+	                	Yen
+	                </h6>
+	                <p class="card-text mt-2" th:text="*{description}" style="height: 12rem;">
+	                </p>
 	            </div>
 	        </div>
 	    </div>

@@ -30,14 +30,13 @@ public class ItemController {
         return "item_form";
     }
 
-
     @PostMapping("/add")
     public String registerItem(Item item) {
         itemRepository.save(item);
         return "redirect:/items";
     }
 
-    @GetMapping("{id:[0-9]+}")//下の@path以下にIDが入ってくる
+    @GetMapping("{id:[0-9]+}")//下の@path以下にIDが入ってくる-> ... / item / {id}
     public String getDetail(Model model, @PathVariable("id") Long id) {
         model.addAttribute("item", itemRepository.getOne(id));
         return "detail";
