@@ -36,6 +36,12 @@ public class ItemController {
         return "redirect:/items";
     }
 
+    @PostMapping("{id:[0-9]+}")
+    public String update(Item item) {
+    	itemRepository.save(item);
+    	return "redirect:/items";
+    }
+
     @GetMapping("{id:[0-9]+}")//下の@path以下にIDが入ってくる-> ... / item / {id}
     public String getDetail(Model model, @PathVariable("id") Long id) {
         model.addAttribute("item", itemRepository.getOne(id));
