@@ -1,7 +1,5 @@
 package handson.example.springshopsearch.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,41 +9,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import handson.example.springshopsearch.model.item.Item;
-import handson.example.springshopsearch.model.item.ItemRepository;
+import handson.example.springshopsearch.service.ItemService;
 @Controller
 @RequestMapping("/items")
 public class ItemController {
 
 	@Autowired
-    ItemRepository itemRepository;
+    ItemService itemService;
 	@GetMapping
     public String listItem(Model model) {
-        List<Item> list = itemRepository.findAll();
-        model.addAttribute("items", list);
-        return "list_item";
+        return itemService.listItem(model);
     }
 
 	@GetMapping("add")
     public String getForm() {
-        return "item_form";
+        return itemService.getForm();
     }
 
     @PostMapping("/add")
     public String registerItem(Item item) {
-        itemRepository.save(item);
-        return "redirect:/items";
+        return itemService.registerItem(item);
     }
 
     @PostMapping("{id:[0-9]+}")
     public String update(Item item) {
-    	itemRepository.save(item);
-    	return "redirect:/items";
+    	return itemService.update(item);
     }
 
     @GetMapping("{id:[0-9]+}")//下の@path以下にIDが入ってくる-> ... / item / {id}
     public String getDetail(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("item", itemRepository.getOne(id));
-        return "detail";
+        return itemService.getDetail(model, id);
     }
 
 }
